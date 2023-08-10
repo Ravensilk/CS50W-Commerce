@@ -1,0 +1,27 @@
+body {
+    padding: 10px;
+
+}
+
+.list-img {
+    height: 25vh;
+    width: auto;
+    object-fit: contain;
+}
+
+.border {
+    --bs-border-opacity: .3;
+}
+
+.comment-border {
+    border-radius: 10px;
+}
+
+.comment {
+    max-height: 30vh;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+}

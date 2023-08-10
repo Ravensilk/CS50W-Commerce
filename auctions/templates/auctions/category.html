@@ -1,0 +1,31 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<h2>Listings in {{ category.name }}</h2>
+    <div class="d-flex flex-column gap-2">
+        {% for item in items %}
+        <div class="container-fluid">
+            <div class="row border border-secondary py-3 px-0 d-flex flex-row">
+                <div class="col-3 d-flex justify-content-center align-items-center">
+                    <div>{% if item.imagelink %}<img class="list-img" src="{{ item.imagelink }}" alt="{{ item.name }}-image">{% else %}No Image Available{% endif %}</div>
+                </div>
+                <div class="col-9 d-flex flex-column gap-2">
+                    <h5>{{ item.name }}</h5>
+                    <h6>Price: ${{ item.current|floatformat:2 }}</h6>
+                    <span style="font-size: 12px;" class="text-secondary">Created on: {{ item.created_on }}</span>
+                    {% if item.status %}
+                    <div><span class="badge rounded-pill text-bg-success">Active</span></div>
+                    {% else %}
+                    <div><span class="badge rounded-pill text-bg-danger">Bidding Closed</span></div>
+                    {% endif %}
+                    <div><a href="{% url 'listing' item.id %}"><button class="btn btn-primary">Go to Listing</button></a></div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <h5 class="text-danger">There are no items in this category yet.</h5>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+

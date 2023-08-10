@@ -1,0 +1,23 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<h2>{{ request.user.username }}'s Watchlist</h2>
+
+{% for item in watchlist %}
+<div class="container-fluid">
+    <div class="row border border-secondary py-3 px-0 d-flex flex-row">
+        <div class="col-3 d-flex justify-content-center align-items-center">
+            <div>{% if item.imagelink %}<img class="list-img my-2" src="{{ item.imagelink }}" alt="{{ item.name }}-image">{% else %}No Image Available{% endif %}</div>
+        </div>
+        <div class="col-9 d-flex flex-column gap-2">
+            <h5>{{ item.name }}</h5>
+            <h6>Price: ${{ item.current|floatformat:2 }}</h6>
+            <span style="font-size: 12px;" class="text-secondary">Created on: {{ item.created_on }}</span>
+            <a href="{% url 'listing' item.id %}"><button class="btn btn-primary">Go to Listing</button></a>
+        </div>
+    </div>
+</div>
+{% empty %}
+<h5 class="text-danger">You currently have no items in your watchlist!</h5>
+{% endfor %}
+{% endblock %}
